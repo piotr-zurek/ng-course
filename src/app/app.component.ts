@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'nexio-todo';
+  currentValue = 0;
+
+  increment(): void {
+    this.currentValue += 1;
+  }
+
+  decrement(): void {
+    this.currentValue -= 1;
+  }
 }
