@@ -1,13 +1,16 @@
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit($event)" #form="ngForm">
   <fieldset>
     <label for="name" >Name: </label>
-    <input id="name" type="text" (input)="onNameChange($event)">
+    <input id="name" name="name" type="text" minlength="3" required [(ngModel)]="name">
   </fieldset>
 
   <fieldset>
     <label for="content">Treść: </label>
-    <textarea id="content"></textarea>
+    <textarea id="content"
+              name="body"
+              required
+              [(ngModel)]="body"></textarea>
   </fieldset>
 
-  <button type="submit">Wyślij</button>
+  <button [disabled]="form.invalid" type="submit">Wyślij</button>
 </form>

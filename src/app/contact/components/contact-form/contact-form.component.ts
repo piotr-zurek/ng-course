@@ -5,22 +5,15 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent {
   name = '';
+  body = '';
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  onNameChange($event: any) {
-    const value = $event.target.value;
-    this.name = value;
-  }
-
-  onSubmit() {
+  onSubmit(event) {
+    console.log(event);
     console.log({
-      name: this.name
+      name: this.name,
+      body: this.body
     });
   }
 }
