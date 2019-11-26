@@ -1,5 +1,9 @@
 <h4 class="author"
+    role="button"
     [class.author--is-important]="isImportant"
+    [attr.aria-label]="isImportant ? 'Element jest ważny' : null"
+    [tabIndex]="isImportant ? 0 : null"
+    (keydown.space)="spacePress()"
     >{{ author }}</h4>
 
 <div class="content">

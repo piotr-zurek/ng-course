@@ -15,4 +15,8 @@ export class CommentComponent implements OnInit {
   ngOnInit() {
   }
 
+  spacePress() {
+    console.log('space');
+  }
+
 }
