@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Subject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+
+const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 
 @Injectable({
   providedIn: 'root'
