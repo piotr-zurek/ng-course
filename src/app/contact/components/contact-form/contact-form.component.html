@@ -1,0 +1,13 @@
+<form (ngSubmit)="onSubmit()">
+  <fieldset>
+    <label for="name" >Name: </label>
+    <input id="name" type="text" (input)="onNameChange($event)">
+  </fieldset>
+
+  <fieldset>
+    <label for="content">Treść: </label>
+    <textarea id="content"></textarea>
+  </fieldset>
+
+  <button type="submit">Wyślij</button>
+</form>
