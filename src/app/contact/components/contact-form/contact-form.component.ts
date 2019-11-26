@@ -8,7 +8,11 @@ import {ContactFormState} from '../../models/contact-form-payload';
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent {
-  previousState: Partial<ContactFormState> = {};
+  previousState: Partial<ContactFormState> = {
+    body: '',
+    name: '',
+    subject: ''
+  };
 
   formGroup = new FormGroup({
     name: new FormControl(''),
