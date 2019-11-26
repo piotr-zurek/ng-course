@@ -1,16 +1,23 @@
-<form (ngSubmit)="onSubmit($event)" #form="ngForm">
+<form (submit)="onSubmit($event)" [formGroup]="formGroup">
   <fieldset>
     <label for="name" >Name: </label>
-    <input id="name" name="name" type="text" minlength="3" required [(ngModel)]="name">
+    <input id="name" name="name" type="text" formControlName="name">
+  </fieldset>
+  <fieldset>
+    <label for="subject" >Subject: </label>
+    <input id="subject" name="subject" type="text" formControlName="subject">
   </fieldset>
 
   <fieldset>
     <label for="content">Treść: </label>
     <textarea id="content"
               name="body"
-              required
-              [(ngModel)]="body"></textarea>
+              formControlName="body"></textarea>
   </fieldset>
 
-  <button [disabled]="form.invalid" type="submit">Wyślij</button>
+  <button type="submit">Wyślij</button>
+  <button type="button" (click)="reset()">Resetuj formularz</button>
+  <button type="button" (click)="saveState()">Zapisz formularz</button>
+  <button type="button" (click)="restoreState()">Przywróć formularz</button>
 </form>
+

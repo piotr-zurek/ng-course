@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ContactFormState} from '../../models/contact-form-payload';
 
 @Component({
   selector: 'app-contact-form',
@@ -6,14 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent {
-  name = '';
-  body = '';
+  previousState: Partial<ContactFormState> = {};
+
+  formGroup = new FormGroup({
+    name: new FormControl(''),
+    body: new FormControl(''),
+    subject: new FormControl(''),
+  });
+
+  reset() {
+    this.formGroup.reset();
+  }
+
+  saveState() {
+    this.previousState = this.formGroup.value;
+  }
+
+  restoreState() {
+    this.formGroup.setValue(this.previousState);
+  }
 
   onSubmit(event) {
-    console.log(event);
-    console.log({
-      name: this.name,
-      body: this.body
-    });
+    console.log(this.formGroup.value);
   }
 }

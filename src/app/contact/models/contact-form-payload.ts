@@ -1,4 +1,5 @@
-export class ContactFormPayload {
+export interface ContactFormState {
   name: string;
-  content: string;
+  subject: string;
+  body: string;
 }
