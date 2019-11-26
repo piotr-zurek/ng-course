@@ -11,6 +11,11 @@
   <div class="content">
     {{ content }}
   </div>
+  <div>
+    Długość zawartości:
+    {{ content | length }}
+  </div>
+  <div>Utworzono: {{ date | date : 'mediumDate' : null : 'pl' }}</div>
 </ng-container>
 
 <ng-template #loading>

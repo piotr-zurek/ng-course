@@ -6,6 +6,12 @@ import { ButtonComponent } from './button/button.component';
 import { CounterComponent } from './counter/counter.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentComponent } from './comment/comment.component';
+import localePl from '@angular/common/locales/pl';
+import {registerLocaleData} from '@angular/common';
+import localePLExtra from '@angular/common/locales/extra/pl';
+import { LengthPipe } from './length.pipe';
+
+registerLocaleData(localePl, 'pl', localePLExtra);
 
 @NgModule({
   declarations: [
@@ -14,6 +20,7 @@ import { CommentComponent } from './comment/comment.component';
     CounterComponent,
     CommentsComponent,
     CommentComponent,
+    LengthPipe,
   ],
   imports: [
     BrowserModule

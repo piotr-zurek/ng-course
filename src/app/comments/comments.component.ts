@@ -11,17 +11,20 @@ export class CommentsComponent implements OnInit {
     {
       author: 'John Doe',
       content: 'Hello World',
-      isImportant: true
+      isImportant: true,
+      date: new Date('2019-01-01')
     },
     {
       author: 'Peter Parker',
       content: 'HELLLOOO!',
-      isImportant: false
+      isImportant: false,
+      date: new Date('2019-01-08')
     },
     {
       author: 'Walter White',
       content: 'Im Heisenberg',
-      isImportant: false
+      isImportant: false,
+      date: new Date('2019-01-12')
     }
   ];
 
@@ -30,7 +33,7 @@ export class CommentsComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;
-    }, 3000)
+    }, 1000);
   }
 
 }
