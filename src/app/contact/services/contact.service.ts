@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 
 const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 
@@ -9,7 +10,8 @@ const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 export class ContactService {
   tncAccepted: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   accept() {
     this.tncAccepted.next(true);
@@ -17,5 +19,9 @@ export class ContactService {
 
   cancel() {
     this.tncAccepted.next(false);
+  }
+
+  getUsers(): Observable<HttpResponse<any>> {
+    return this.httpClient.get( API_ENDPOINT, { observe: 'response' });
   }
 }

@@ -1,3 +1,10 @@
 <app-button text="Skontaktuj się"></app-button>
 
 <div (click)="accept()">{{ isAccepted ? 'Zaakceptowano' : 'Kliknij aby zaakceptować'  }}</div>
+
+
+<ul>
+  <li *ngFor="let user of users">
+    {{ user | json }}
+  </li>
+</ul>
