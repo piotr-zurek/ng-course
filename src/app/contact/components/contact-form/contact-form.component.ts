@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {ContactFormState} from '../../models/contact-form-payload';
 
 @Component({
@@ -15,9 +15,13 @@ export class ContactFormComponent {
   };
 
   formGroup = new FormGroup({
-    name: new FormControl(''),
-    body: new FormControl(''),
-    subject: new FormControl(''),
+    name: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(5)]
+    ),
+    body: new FormControl('', [Validators.required]),
+    subject: new FormControl('', [Validators.required, isNIP()]),
   });
 
   reset() {
@@ -35,4 +39,36 @@ export class ContactFormComponent {
   onSubmit(event) {
     console.log(this.formGroup.value);
   }
+
+  isFormValid() {
+   return this.formGroup.valid;
+  }
+
+  isControlInvalid(controlName: string) {
+    const control = this.formGroup.get(controlName);
+    return this.shouldDisplayError(control);
+  }
+
+  shouldDisplayError(control: AbstractControl) {
+    return control.touched && control.invalid;
+  }
+
+  getSubjectErrorLabel() {
+    if (this.formGroup.get('subject').errors.required) {
+      return 'To pole jest wymagane';
+    }
+
+    if (this.formGroup.get('subject').errors.isNip) {
+      return 'To nie jest NIP';
+    }
+  }
+
+}
+
+function isNIP(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const isValid = control.value && control.value.length === 10;
+
+    return isValid ? null : { isNip: true };
+  };
 }

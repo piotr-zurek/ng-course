@@ -2,10 +2,19 @@
   <fieldset>
     <label for="name" >Name: </label>
     <input id="name" name="name" type="text" formControlName="name">
+
+    <div class="error" *ngIf="isControlInvalid('name')">
+      Błąd pola
+    </div>
   </fieldset>
+
   <fieldset>
     <label for="subject" >Subject: </label>
     <input id="subject" name="subject" type="text" formControlName="subject">
+
+    <div class="error" *ngIf="isControlInvalid('subject')">
+      {{ getSubjectErrorLabel() }}
+    </div>
   </fieldset>
 
   <fieldset>
@@ -13,9 +22,13 @@
     <textarea id="content"
               name="body"
               formControlName="body"></textarea>
+
+    <div class="error" *ngIf="isControlInvalid('body')">
+      Błąd pola
+    </div>
   </fieldset>
 
-  <button type="submit">Wyślij</button>
+  <button type="submit" [disabled]="!isFormValid()">Wyślij</button>
   <button type="button" (click)="reset()">Resetuj formularz</button>
   <button type="button" (click)="saveState()">Zapisz formularz</button>
   <button type="button" (click)="restoreState()">Przywróć formularz</button>
