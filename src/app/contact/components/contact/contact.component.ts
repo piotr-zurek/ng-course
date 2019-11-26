@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ContactService} from '../../services/contact.service';
 import {Subscription} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
+import {UsersDto} from '../../models/users.dto';
 
 @Component({
   selector: 'app-contact',
@@ -10,7 +11,7 @@ import {HttpResponse} from '@angular/common/http';
 })
 export class ContactComponent implements OnInit, OnDestroy {
   isAccepted: boolean;
-  users: object[] = [];
+  users: UsersDto = [];
   hasError = false;
   isLoading = false;
   private subscription: Subscription;
@@ -33,7 +34,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSuccess(res: HttpResponse<object[]>) {
+  onSuccess(res: HttpResponse<UsersDto>) {
     this.users = res.body;
     this.hasError = false;
   }

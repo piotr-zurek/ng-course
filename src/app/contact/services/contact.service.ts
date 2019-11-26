@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpResponse} from '@angular/common/http';
+import {UsersDto} from '../models/users.dto';
 
 const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 
@@ -21,7 +22,7 @@ export class ContactService {
     this.tncAccepted.next(false);
   }
 
-  getUsers(): Observable<HttpResponse<any>> {
-    return this.httpClient.get( API_ENDPOINT, { observe: 'response' });
+  getUsers(): Observable<HttpResponse<UsersDto>> {
+    return this.httpClient.get<UsersDto>( API_ENDPOINT, { observe: 'response' });
   }
 }
