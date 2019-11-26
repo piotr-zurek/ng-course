@@ -1,6 +1,7 @@
 <ul>
   <app-comment *ngFor="let comment of comments"
                [author]="comment.author"
-               [content]="comment.content">
+               [content]="comment.content"
+               [isImportant]="comment.isImportant">
   </app-comment>
 </ul>

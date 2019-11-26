@@ -1,0 +1,13 @@
+.author {
+  font-weight: 300;
+  font-size: 24px;
+  color: black;
+
+  &--is-important {
+    color: tomato;
+  }
+}
+
+.content-container {
+  font-size: 18px;
+}

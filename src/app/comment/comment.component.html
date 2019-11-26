@@ -1,2 +1,7 @@
-<h4>{{ author }}</h4>
-<p>{{ content }}</p>
+<h4 class="author"
+    [class.author--is-important]="isImportant"
+    >{{ author }}</h4>
+
+<div class="content">
+  {{ content }}
+</div>

@@ -9,15 +9,18 @@ export class CommentsComponent implements OnInit {
   comments = [
     {
       author: 'John Doe',
-      content: 'Hello World'
+      content: 'Hello World',
+      isImportant: true
     },
     {
       author: 'Peter Parker',
-      content: 'HELLLOOO!'
+      content: 'HELLLOOO!',
+      isImportant: false
     },
     {
       author: 'Walter White',
-      content: 'Im Heisenberg'
+      content: 'Im Heisenberg',
+      isImportant: false
     }
   ];
 
