@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
+  isLoading = true;
   comments = [
     {
       author: 'John Doe',
@@ -27,6 +28,9 @@ export class CommentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000)
   }
 
 }

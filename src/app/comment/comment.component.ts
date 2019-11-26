@@ -9,6 +9,7 @@ export class CommentComponent implements OnInit {
   @Input() author: string;
   @Input() content: string;
   @Input() isImportant: boolean;
+  @Input() isLoading: boolean;
 
   constructor() { }
 

@@ -2,10 +2,12 @@
   <app-comment *ngFor="let comment of comments"
                [author]="comment.author"
                [content]="comment.content"
-               [isImportant]="comment.isImportant">
+               [isImportant]="comment.isImportant"
+               [isLoading]="isLoading">
   </app-comment>
 </ul>
 
+<ng-content></ng-content>
 
 <div class="small-comments">
   <app-comment author="New Author" content="Hello people" class="is-small">
