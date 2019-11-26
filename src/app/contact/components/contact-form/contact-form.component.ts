@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {ContactFormState} from '../../models/contact-form-payload';
 
@@ -8,6 +8,8 @@ import {ContactFormState} from '../../models/contact-form-payload';
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent {
+  @Output() formSubmit = new EventEmitter<ContactFormState>();
+
   previousState: Partial<ContactFormState> = {
     body: '',
     name: '',
@@ -36,8 +38,8 @@ export class ContactFormComponent {
     this.formGroup.setValue(this.previousState);
   }
 
-  onSubmit(event) {
-    console.log(this.formGroup.value);
+  onSubmit() {
+    this.formSubmit.emit(this.formGroup.value);
   }
 
   isFormValid() {

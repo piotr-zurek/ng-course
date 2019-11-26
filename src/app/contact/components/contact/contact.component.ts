@@ -1,8 +1,9 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ContactService} from '../../services/contact.service';
 import {Subscription} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
 import {UsersDto} from '../../models/users.dto';
+import {ContactFormState} from '../../models/contact-form-payload';
 
 @Component({
   selector: 'app-contact',
@@ -56,4 +57,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  onFormSubmit($event: ContactFormState) {
+    this.contactService.send($event).subscribe();
+  }
 }
