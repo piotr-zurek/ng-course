@@ -7,8 +7,22 @@ import {registerLocaleData} from '@angular/common';
 import localePLExtra from '@angular/common/locales/extra/pl';
 import {SharedModule} from './shared/shared.module';
 import {ContactModule} from './contact/contact.module';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home/components/home/home.component';
+import {HomeModule} from './home/home.module';
 
 registerLocaleData(localePl, 'pl', localePLExtra);
+
+const routes: Routes = [
+  {
+    path: 'contact',
+    loadChildren: () => ContactModule
+  },
+  {
+    component: HomeComponent,
+    path: ''
+  }
+];
 
 @NgModule({
   declarations: [
@@ -17,7 +31,11 @@ registerLocaleData(localePl, 'pl', localePLExtra);
   imports: [
     BrowserModule,
     SharedModule,
-    ContactModule
+    ContactModule,
+    HomeModule,
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'top'
+    })
   ],
   bootstrap: [AppComponent]
 })

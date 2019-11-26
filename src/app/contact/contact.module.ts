@@ -5,11 +5,22 @@ import {SharedModule} from '../shared/shared.module';
 import {HttpClientModule} from '@angular/common/http';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InfoComponent } from './components/info/info.component';
+import {RouterModule, Routes} from '@angular/router';
 
-
+const routes: Routes = [
+  {
+    path: 'info',
+    component: InfoComponent
+  },
+  {
+    path: '',
+    component: ContactComponent
+  }
+];
 
 @NgModule({
-  declarations: [ContactComponent, ContactFormComponent],
+  declarations: [ContactComponent, ContactFormComponent, InfoComponent],
   exports: [
     ContactComponent
   ],
@@ -17,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class ContactModule { }
