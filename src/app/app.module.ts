@@ -10,6 +10,7 @@ import {ContactModule} from './contact/contact.module';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/components/home/home.component';
 import {HomeModule} from './home/home.module';
+import {ErrorPageComponent} from './shared/components/error-page/error-page.component';
 
 registerLocaleData(localePl, 'pl', localePLExtra);
 
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     component: HomeComponent,
     path: ''
+  },
+  {
+    component: ErrorPageComponent,
+    path: '**'
   }
 ];
 
