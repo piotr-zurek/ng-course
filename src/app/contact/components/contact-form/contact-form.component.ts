@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {ContactFormState} from '../../models/contact-form-payload';
 
@@ -7,7 +7,7 @@ import {ContactFormState} from '../../models/contact-form-payload';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent {
+export class ContactFormComponent implements OnInit {
   @Output() formSubmit = new EventEmitter<ContactFormState>();
 
   previousState: Partial<ContactFormState> = {
@@ -25,6 +25,12 @@ export class ContactFormComponent {
     body: new FormControl('', [Validators.required]),
     subject: new FormControl('', [Validators.required, isNIP()]),
   });
+
+  ngOnInit() {
+    this.formGroup.valueChanges.subscribe(value => {
+      console.log(value);
+    });
+  }
 
   reset() {
     this.formGroup.reset();
