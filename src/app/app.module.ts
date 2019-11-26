@@ -19,7 +19,6 @@ registerLocaleData(localePl, 'pl', localePLExtra);
     SharedModule,
     ContactModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
