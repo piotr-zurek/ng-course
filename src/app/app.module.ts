@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 registerLocaleData(localePl, 'pl', localePLExtra);
 
@@ -55,6 +56,7 @@ const routes: Routes = [
         strictActionImmutability: true
       }
     }),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   bootstrap: [AppComponent]

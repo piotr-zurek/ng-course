@@ -8,6 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InfoComponent } from './components/info/info.component';
 import {RouterModule, Routes} from '@angular/router';
 import {IsTermsAndConditionAcceptedGuard} from './guards/is-terms-and-condition-accepted.guard';
+import { EffectsModule } from '@ngrx/effects';
+import { ContactEffects } from './effects/contact.effects';
+import {StoreModule} from '@ngrx/store';
+import * as fromReducers from './reducers/contact.reducer';
 
 const routes: Routes = [
   {
@@ -31,7 +35,9 @@ const routes: Routes = [
     SharedModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature(fromReducers.contactFeatureKey, fromReducers.reducer),
+    EffectsModule.forFeature([ContactEffects])
   ]
 })
 export class ContactModule { }

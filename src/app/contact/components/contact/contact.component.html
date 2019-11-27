@@ -1,15 +1,10 @@
-<app-button text="Skontaktuj się"></app-button>
-
-<div (click)="accept()">{{ isAccepted ? 'Zaakceptowano' : 'Kliknij aby zaakceptować'  }}</div>
-
-
-<h2>Skontaktuj się</h2>
-<app-contact-form (formSubmit)="onFormSubmit($event)"></app-contact-form>
-
 <h2>Nasz zespół</h2>
+
 <ul>
-  <li *ngFor="let user of users">
+  <li *ngFor="let user of contacts$ | async">
     {{ user.name }}
     <a [href]="'mailto:' + user.email">{{ user.email }}</a>
   </li>
 </ul>
+
+<div *ngIf="isLoading$ | async">Ładowanie...</div>

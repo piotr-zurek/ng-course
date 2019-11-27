@@ -1,73 +1,29 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ContactService} from '../../services/contact.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
 import {UsersDto} from '../../models/users.dto';
 import {ContactFormState} from '../../models/contact-form-payload';
+import {Store} from '@ngrx/store';
+import {State} from '../../reducers/contact.reducer';
+import * as fromContacts from '../../selectors/contact.selectors';
+import * as contactsActions from '../../actions/contact.actions';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit, OnDestroy {
-  isAccepted: boolean;
-  users: UsersDto = [];
-  hasError = false;
-  isLoading = false;
-  private subscription: Subscription;
-  constructor(private contactService: ContactService) { }
+export class ContactComponent implements OnInit {
+  isLoading$: Observable<boolean>;
+  contacts$: Observable<UsersDto>;
+
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
-    this.isLoading = true;
+    this.isLoading$ = this.store.select(fromContacts.selectIsLoading);
+    this.contacts$ = this.store.select(fromContacts.selectContacts);
 
-    this.contactService.getUsersPhones().subscribe(
-      value => {
-        console.log(value);
-      },
-      err => {
-        console.warn(err);
-      });
-
-    // ===========
-    this.contactService.getUsers()
-      .subscribe(
-        (res) => this.onSuccess(res),
-        (err) => this.onError(err),
-        () => this.onComplete()
-      );
-
-    // ==================
-    this.subscription = this.contactService.tncAccepted$.subscribe(isAccepted => {
-      // console.log('nowa wartość', isAccepted);
-
-      this.isAccepted = isAccepted;
-    });
-  }
-
-  onSuccess(res: HttpResponse<UsersDto>) {
-    this.users = res.body;
-    this.hasError = false;
-  }
-
-  onError(error: any) {
-    console.warn(error);
-    this.hasError = true;
-  }
-
-  onComplete() {
-    this.isLoading = true;
-  }
-
-  accept() {
-    this.contactService.accept();
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  onFormSubmit($event: ContactFormState) {
-    this.contactService.send($event).subscribe();
+    this.store.dispatch(new contactsActions.LoadContacts());
   }
 }
