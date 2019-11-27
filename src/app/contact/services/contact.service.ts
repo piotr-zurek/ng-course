@@ -10,17 +10,17 @@ const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
   providedIn: 'root'
 })
 export class ContactService {
-  tncAccepted: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  tncAccepted$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private httpClient: HttpClient) {
   }
 
   accept() {
-    this.tncAccepted.next(true);
+    this.tncAccepted$.next(true);
   }
 
   cancel() {
-    this.tncAccepted.next(false);
+    this.tncAccepted$.next(false);
   }
 
   getUsers(): Observable<HttpResponse<UsersDto>> {

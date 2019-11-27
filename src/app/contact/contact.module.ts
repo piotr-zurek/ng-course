@@ -7,11 +7,13 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfoComponent } from './components/info/info.component';
 import {RouterModule, Routes} from '@angular/router';
+import {IsTermsAndConditionAcceptedGuard} from './guards/is-terms-and-condition-accepted.guard';
 
 const routes: Routes = [
   {
     path: 'info/:id',
-    component: InfoComponent
+    component: InfoComponent,
+    canActivate: [IsTermsAndConditionAcceptedGuard]
   },
   {
     path: '',

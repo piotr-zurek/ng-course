@@ -10,13 +10,16 @@ import {PreloadAllModules, PreloadingStrategy, RouterModule, Routes} from '@angu
 import {HomeComponent} from './home/components/home/home.component';
 import {HomeModule} from './home/home.module';
 import {ErrorPageComponent} from './shared/components/error-page/error-page.component';
+import {HttpClientModule} from '@angular/common/http';
+import {MyGuardGuard} from './guards/my-guard.guard';
 
 registerLocaleData(localePl, 'pl', localePLExtra);
 
 const routes: Routes = [
   {
     path: 'contact',
-    loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
+    loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
+    // canLoad: [MyGuardGuard]
   },
   {
     component: HomeComponent,
@@ -36,6 +39,7 @@ const routes: Routes = [
     BrowserModule,
     SharedModule,
     HomeModule,
+    HttpClientModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top',
       preloadingStrategy: PreloadAllModules

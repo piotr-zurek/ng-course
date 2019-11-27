@@ -28,7 +28,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       );
 
     // ==================
-    this.subscription = this.contactService.tncAccepted.subscribe(isAccepted => {
+    this.subscription = this.contactService.tncAccepted$.subscribe(isAccepted => {
       // console.log('nowa wartość', isAccepted);
 
       this.isAccepted = isAccepted;
