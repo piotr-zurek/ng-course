@@ -1,1 +1,7 @@
 <p>home works!</p>
+<button (click)="onLogin()">Login</button>
+
+<div>Użytkownik jest zalogowany?</div>
+<strong>
+  {{ (isLoading$ | async) ? 'tak' : 'nie' }}
+</strong>

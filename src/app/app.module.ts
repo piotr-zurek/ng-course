@@ -12,6 +12,10 @@ import {HomeModule} from './home/home.module';
 import {ErrorPageComponent} from './shared/components/error-page/error-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {MyGuardGuard} from './guards/my-guard.guard';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 registerLocaleData(localePl, 'pl', localePLExtra);
 
@@ -43,7 +47,15 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top',
       preloadingStrategy: PreloadAllModules
-    })
+    }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   bootstrap: [AppComponent]
 })

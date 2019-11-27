@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
+    }
+  },
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  },
   "defaultProject": "nexio-todo"
 }
