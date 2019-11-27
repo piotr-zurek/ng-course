@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {State} from '../../../reducers';
 import * as loginActions from '../../../actions/login.actions';
 import {Observable} from 'rxjs';
-import * as loginSelectors  from '../../../selectors/login.selectors';
+import * as loginSelectors from '../../../selectors/login.selectors';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   isUserLoggedIn$: Observable<boolean>;

@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {UsersDto} from '../../models/users.dto';
 import {Store} from '@ngrx/store';
@@ -9,11 +9,13 @@ import * as contactsActions from '../../actions/contact.actions';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactComponent implements OnInit {
   isLoading$: Observable<boolean>;
   contacts$: Observable<UsersDto>;
+  testString = 'old';
 
   @HostBinding('class.foo')
   get class() {
@@ -25,7 +27,12 @@ export class ContactComponent implements OnInit {
     return 'a';
   }
 
-  constructor(private store: Store<State>) { }
+  constructor(private store: Store<State>, private cdr: ChangeDetectorRef) {
+    setTimeout(() => {
+        this.testString = 'new';
+        this.cdr.markForCheck();
+    }, 2000);
+  }
 
   ngOnInit() {
     this.isLoading$ = this.store.select(fromContacts.selectIsLoading);
