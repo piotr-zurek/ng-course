@@ -3,7 +3,7 @@ import {BehaviorSubject, combineLatest, Observable, of, throwError} from 'rxjs';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {UsersDto} from '../models/users.dto';
 import {ContactFormState} from '../models/contact-form-payload';
-import {catchError, map, withLatestFrom} from 'rxjs/operators';
+import {catchError, map, switchMap, withLatestFrom} from 'rxjs/operators';
 
 const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 
@@ -35,9 +35,10 @@ export class ContactService {
 
   getUsersPhones() {
     return this.getUsers().pipe(
-      withLatestFrom(this.name$),
-      map(([users, name]) => {
-        return users.body.map(user => user.phone + ' ' + name);
+      switchMap(res => {
+        return res.body.map(user => {
+          return user;
+        });
       }),
       catchError(err => {
         return throwError('błąd');
