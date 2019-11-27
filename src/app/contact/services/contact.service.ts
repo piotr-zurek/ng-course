@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {UsersDto} from '../models/users.dto';
 import {ContactFormState} from '../models/contact-form-payload';
+import {catchError, map, withLatestFrom} from 'rxjs/operators';
 
 const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 
@@ -29,5 +30,16 @@ export class ContactService {
 
   send(body: ContactFormState) {
     return this.httpClient.post('http://google.com', body);
+  }
+
+  getUsersPhones() {
+    return this.getUsers().pipe(
+      map(res => {
+        return res.body.map(user => (user as any).asd.asd);
+      }),
+      catchError(err => {
+        return throwError('błąd');
+      })
+    );
   }
 }

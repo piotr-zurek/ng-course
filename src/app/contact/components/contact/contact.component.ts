@@ -20,6 +20,16 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
+
+    this.contactService.getUsersPhones().subscribe(
+      value => {
+        console.log(value);
+      },
+      err => {
+        console.warn(err);
+      });
+
+    // ===========
     this.contactService.getUsers()
       .subscribe(
         (res) => this.onSuccess(res),
