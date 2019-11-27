@@ -1,9 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ContactService} from '../../services/contact.service';
-import {Observable, Subscription} from 'rxjs';
-import {HttpResponse} from '@angular/common/http';
+import {Component, HostBinding, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 import {UsersDto} from '../../models/users.dto';
-import {ContactFormState} from '../../models/contact-form-payload';
 import {Store} from '@ngrx/store';
 import {State} from '../../reducers/contact.reducer';
 import * as fromContacts from '../../selectors/contact.selectors';
@@ -17,6 +14,16 @@ import * as contactsActions from '../../actions/contact.actions';
 export class ContactComponent implements OnInit {
   isLoading$: Observable<boolean>;
   contacts$: Observable<UsersDto>;
+
+  @HostBinding('class.foo')
+  get class() {
+    return true;
+  }
+
+  @HostBinding('attr.bar')
+  get attr() {
+    return 'a';
+  }
 
   constructor(private store: Store<State>) { }
 
