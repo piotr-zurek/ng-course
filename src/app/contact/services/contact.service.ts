@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, of, throwError} from 'rxjs';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {UsersDto} from '../models/users.dto';
 import {ContactFormState} from '../models/contact-form-payload';
@@ -12,6 +12,7 @@ const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
 })
 export class ContactService {
   tncAccepted$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  name$: BehaviorSubject<string> = new BehaviorSubject('Jan');
 
   constructor(private httpClient: HttpClient) {
   }
@@ -34,11 +35,23 @@ export class ContactService {
 
   getUsersPhones() {
     return this.getUsers().pipe(
-      map(res => {
-        return res.body.map(user => (user as any).asd.asd);
+      withLatestFrom(this.name$),
+      map(([users, name]) => {
+        return users.body.map(user => user.phone + ' ' + name);
       }),
       catchError(err => {
         return throwError('błąd');
+      })
+    );
+  }
+
+  getCurrentUsersPhones() {
+    return combineLatest(
+      this.getUsers(),
+      this.name$
+    ).pipe(
+      map(([users, name]) => {
+        return users.body.map(user => user.phone + ' ' + name);
       })
     );
   }
