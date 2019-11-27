@@ -6,7 +6,7 @@ import localePl from '@angular/common/locales/pl';
 import {registerLocaleData} from '@angular/common';
 import localePLExtra from '@angular/common/locales/extra/pl';
 import {SharedModule} from './shared/shared.module';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, PreloadingStrategy, RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/components/home/home.component';
 import {HomeModule} from './home/home.module';
 import {ErrorPageComponent} from './shared/components/error-page/error-page.component';
@@ -37,7 +37,8 @@ const routes: Routes = [
     SharedModule,
     HomeModule,
     RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'top'
+      scrollPositionRestoration: 'top',
+      preloadingStrategy: PreloadAllModules
     })
   ],
   bootstrap: [AppComponent]
