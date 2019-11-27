@@ -6,7 +6,6 @@ import localePl from '@angular/common/locales/pl';
 import {registerLocaleData} from '@angular/common';
 import localePLExtra from '@angular/common/locales/extra/pl';
 import {SharedModule} from './shared/shared.module';
-import {ContactModule} from './contact/contact.module';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/components/home/home.component';
 import {HomeModule} from './home/home.module';
@@ -17,7 +16,7 @@ registerLocaleData(localePl, 'pl', localePLExtra);
 const routes: Routes = [
   {
     path: 'contact',
-    loadChildren: () => ContactModule
+    loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
   },
   {
     component: HomeComponent,
@@ -36,7 +35,6 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     SharedModule,
-    ContactModule,
     HomeModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top'
